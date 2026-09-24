@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Calendar icon">
+  <rect width="120" height="120" rx="22" fill="#207a5b"/>
+  <path d="M29 39h62v44a8 8 0 0 1-8 8H37a8 8 0 0 1-8-8V39Z" fill="#fff"/>
+  <path d="M37 27h46a8 8 0 0 1 8 8v11H29V35a8 8 0 0 1 8-8Z" fill="#e06b4f"/>
+  <path d="M44 22v15M76 22v15" stroke="#17211d" stroke-width="7" stroke-linecap="round"/>
+  <rect x="42" y="58" width="14" height="14" rx="4" fill="#f4c95d"/>
+  <rect x="64" y="58" width="14" height="14" rx="4" fill="#4b83b7"/>
+  <rect x="42" y="78" width="36" height="6" rx="3" fill="#dfe7df"/>
+</svg>

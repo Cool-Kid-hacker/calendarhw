@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Samsung Tab A8 • Smart Live Calendar</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="calendar.js" defer></script>
+</head>
+<body>
+  <!-- Top Global Navigation Bar -->
+  <header class="app-header">
+    <div class="header-left">
+      <img class="brand-logo" src="assets/calendar-mark.svg" alt="Calendar Mark">
+      <div class="brand-text">
+        <span class="brand-device">Samsung Tab A8</span>
+        <h1 class="brand-title">Smart Calendar</h1>
+      </div>
+    </div>
+
+    <!-- Mode Switcher Tabs -->
+    <nav class="mode-nav" aria-label="View switch">
+      <button id="viewDashboardBtn" class="mode-btn is-active" type="button">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 4h18v16H3zM3 10h18M8 2v4M16 2v4"/></svg>
+        <span>Live Display</span>
+      </button>
+      <button id="viewMakerBtn" class="mode-btn" type="button">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        <span>Add Event</span>
+      </button>
+    </nav>
+
+    <!-- Sync Indicator & Actions -->
+    <div class="header-right">
+      <button id="syncPillBtn" class="sync-pill" type="button" title="Click to view or change Sync Channel">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span id="syncPillText">Sync: syed-tab</span>
+      </button>
+
+      <button id="fullscreenBtn" class="icon-btn" type="button" title="Full screen desk display">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Notification Toast for Remote Pushes -->
+  <div id="liveToast" class="live-toast is-hidden" role="alert" aria-live="assertive">
+    <span class="toast-icon">✨</span>
+    <div class="toast-body">
+      <strong id="toastTitle">New Event Received!</strong>
+      <p id="toastMessage">Math Homework added to calendar</p>
+    </div>
+  </div>
+
+  <main class="app-main">
+    <!-- VIEW 1: LIVE TABLET DISPLAY (Desk / Wall Mode) -->
+    <section id="dashboardView" class="view-panel dashboard-layout">
+      <!-- Calendar Grid Panel -->
+      <div class="panel calendar-panel">
+        <div class="calendar-controls">
+          <div class="month-nav">
+            <button id="prevMonthBtn" class="icon-btn-subtle" type="button" aria-label="Previous month">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <h2 id="dashMonthYear" class="month-title">September 2026</h2>
+            <button id="nextMonthBtn" class="icon-btn-subtle" type="button" aria-label="Next month">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+          <button id="todayBtn" class="pill-btn" type="button">Today</button>
+        </div>
+
+        <div class="calendar-weekdays" aria-hidden="true">
+          <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+        </div>
+
+        <div id="dashCalendarGrid" class="dash-grid" role="grid" aria-label="Monthly Calendar">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- Right Sidebar: Live Clock + Clipart + Agenda List -->
+      <aside class="panel sidebar-panel">
+        <!-- Live Clock Card -->
+        <div class="clock-card">
+          <div class="clock-top">
+            <span class="live-badge">LIVE CLOCK</span>
+            <span class="tablet-tag">Tab A8 Display</span>
+          </div>
+          <div id="dashClockTime" class="clock-time">00:00:00</div>
+          <div id="dashClockDate" class="clock-date">Loading...</div>
+        </div>
+
+        <!-- Clipart Banner -->
+        <div class="clipart-banner">
+          <img class="banner-img" src="assets/study-clipart.svg" alt="Study illustrations">
+        </div>
+
+        <!-- Agenda Events List -->
+        <div class="agenda-section">
+          <div class="agenda-header">
+            <h3 id="agendaHeading">Upcoming Events</h3>
+            <button id="clearFilterBtn" class="text-btn is-hidden" type="button">Show All</button>
+          </div>
+          <div id="dashAgendaList" class="agenda-list">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- VIEW 2: REMOTE EVENT MAKER (Input form for any computer) -->
+    <section id="makerView" class="view-panel maker-layout is-hidden">
+      <section class="panel event-panel" aria-labelledby="form-title">
+        <div class="title-row">
+          <div>
+            <p class="eyebrow">Remote Event Creator</p>
+            <h2 id="form-title">Add to Tablet Calendar</h2>
+          </div>
+          <img class="brand-mark" src="assets/calendar-mark.svg" alt="">
+        </div>
+
+        <form id="eventForm" class="event-form">
+          <!-- Category Selector -->
+          <div class="category-row">
+            <span class="field-label">Category</span>
+            <div class="category-pills">
+              <label class="cat-pill">
+                <input type="radio" name="eventCategory" value="homework" checked>
+                <span>📚 Homework</span>
+              </label>
+              <label class="cat-pill">
+                <input type="radio" name="eventCategory" value="exam">
+                <span>📝 Exam</span>
+              </label>
+              <label class="cat-pill">
+                <input type="radio" name="eventCategory" value="project">
+                <span>🎨 Project</span>
+              </label>
+              <label class="cat-pill">
+                <input type="radio" name="eventCategory" value="class">
+                <span>🏫 Class</span>
+              </label>
+              <label class="cat-pill">
+                <input type="radio" name="eventCategory" value="reminder">
+                <span>⏰ Reminder</span>
+              </label>
+            </div>
+          </div>
+
+          <label class="field wide" for="eventTitle">
+            <span>Title</span>
+            <input id="eventTitle" name="eventTitle" type="text" autocomplete="off" required placeholder="Math assignment">
+          </label>
+
+          <div class="field-grid">
+            <label class="field" for="eventDate">
+              <span>Date</span>
+              <input id="eventDate" name="eventDate" type="date" required>
+            </label>
+
+            <label class="switch-field" for="allDay">
+              <span>All day</span>
+              <input id="allDay" name="allDay" type="checkbox">
+              <span class="switch" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <div class="field-grid time-fields">
+            <label class="field" for="startTime">
+              <span>Start</span>
+              <input id="startTime" name="startTime" type="time" required>
+            </label>
+
+            <label class="field" for="endTime">
+              <span>End</span>
+              <input id="endTime" name="endTime" type="time" required>
+            </label>
+          </div>
+
+          <label class="field wide" for="eventLocation">
+            <span>Location</span>
+            <input id="eventLocation" name="eventLocation" type="text" autocomplete="off" placeholder="Room 204 or Online">
+          </label>
+
+          <label class="field wide" for="eventNotes">
+            <span>Notes</span>
+            <textarea id="eventNotes" name="eventNotes" rows="3" placeholder="Bring notebook and calculator"></textarea>
+          </label>
+
+          <div class="actions" aria-label="Event actions">
+            <button class="button primary" id="pushSyncButton" type="submit">
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M12 2v10M17 7l-5-5-5 5M4 14v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/>
+              </svg>
+              <span>Push to Tablet</span>
+            </button>
+
+            <button class="button secondary" id="openCalendarButton" type="button" title="Launch Samsung Calendar on Android">
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M7 2v3M17 2v3M4 9h16M6 5h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"></path>
+                <path d="m9 14 2 2 4-5"></path>
+              </svg>
+              <span>Samsung App</span>
+            </button>
+
+            <button class="button secondary" id="downloadButton" type="button" title="Download .ics file">
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M12 3v11"></path>
+                <path d="m7 10 5 5 5-5"></path>
+                <path d="M5 21h14"></path>
+              </svg>
+              <span>Event File</span>
+            </button>
+
+            <button class="button secondary is-hidden" id="shareButton" type="button">
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M18 8a3 3 0 1 0-2.8-4"></path>
+                <path d="M6 14a3 3 0 1 0 2.8 4"></path>
+                <path d="M8.6 15.5 15.4 8.5"></path>
+                <path d="M8.6 8.5 15.4 15.5"></path>
+              </svg>
+              <span>Share</span>
+            </button>
+          </div>
+
+          <p id="statusMessage" class="status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <!-- Mockup Tablet Preview on Maker Screen -->
+      <aside class="panel preview-panel" aria-label="Event preview">
+        <div class="tablet-frame">
+          <div class="tablet-camera" aria-hidden="true"></div>
+          <div class="tablet-screen">
+            <div class="calendar-top">
+              <span>Samsung Tab A8</span>
+              <strong id="previewMonth">Today</strong>
+            </div>
+            <div class="calendar-grid" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span class="selected" id="previewDay">22</span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="event-preview">
+              <span id="previewCategoryBadge" class="cat-tag homework">📚 Homework</span>
+              <p id="previewTime">9:00 AM - 10:00 AM</p>
+              <h3 id="previewTitle">Math assignment</h3>
+              <span id="previewMeta">Room 204</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <!-- Sync Channel Modal -->
+  <div id="channelModal" class="modal-overlay is-hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <h3 id="modalTitle">Cloud Sync Channel</h3>
+      <p>Set a shared channel code on both your computer and your tablet. Any event you push with this code instantly appears on your tablet screen.</p>
+      
+      <label class="field wide" for="channelInput">
+        <span>Channel Code</span>
+        <input id="channelInput" type="text" autocomplete="off" placeholder="e.g. syed-tab-calendar">
+      </label>
+
+      <div class="modal-actions">
+        <button id="saveChannelBtn" class="button primary" type="button">Save &amp; Connect</button>
+        <button id="closeChannelBtn" class="button secondary" type="button">Cancel</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

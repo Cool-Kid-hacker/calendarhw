@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" role="img" aria-label="Study desk with books, lamp, and pencil">
+  <defs>
+    <linearGradient id="gradSky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4b83b7" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#207a5b" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="gradBook1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e06b4f"/>
+      <stop offset="100%" stop-color="#d0573a"/>
+    </linearGradient>
+    <linearGradient id="gradBook2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f4c95d"/>
+      <stop offset="100%" stop-color="#e2b23a"/>
+    </linearGradient>
+    <linearGradient id="gradBook3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#207a5b"/>
+      <stop offset="100%" stop-color="#145841"/>
+    </linearGradient>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#17211d" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+
+  <!-- Background blob -->
+  <path d="M40 70 Q 70 20, 160 30 T 280 80 Q 300 150, 230 185 T 80 180 Q 20 150, 40 70 Z" fill="url(#gradSky)"/>
+
+  <!-- Shelf / Desk line -->
+  <rect x="30" y="180" width="260" height="12" rx="6" fill="#dfe7df" filter="url(#softShadow)"/>
+
+  <!-- Stack of books -->
+  <!-- Bottom Book (Green) -->
+  <g filter="url(#softShadow)">
+    <rect x="70" y="152" width="130" height="26" rx="4" fill="url(#gradBook3)"/>
+    <rect x="78" y="156" width="114" height="18" rx="2" fill="#f6f8f5"/>
+    <line x1="84" y1="162" x2="114" y2="162" stroke="#207a5b" stroke-width="2" stroke-linecap="round"/>
+    <line x1="84" y1="168" x2="104" y2="168" stroke="#207a5b" stroke-width="2" stroke-linecap="round"/>
+    <path d="M68 152 h 8 v 26 h -8 a 3 3 0 0 1 -3 -3 v -20 a 3 3 0 0 1 3 -3 Z" fill="#145841"/>
+  </g>
+
+  <!-- Middle Book (Yellow) -->
+  <g filter="url(#softShadow)">
+    <rect x="80" y="126" width="110" height="24" rx="4" fill="url(#gradBook2)"/>
+    <rect x="86" y="130" width="98" height="16" rx="2" fill="#fff"/>
+    <line x1="92" y1="135" x2="120" y2="135" stroke="#e2b23a" stroke-width="2" stroke-linecap="round"/>
+    <line x1="92" y1="140" x2="110" y2="140" stroke="#e2b23a" stroke-width="2" stroke-linecap="round"/>
+    <path d="M78 126 h 8 v 24 h -8 a 3 3 0 0 1 -3 -3 v -18 a 3 3 0 0 1 3 -3 Z" fill="#cf9d26"/>
+  </g>
+
+  <!-- Top Book (Coral) -->
+  <g filter="url(#softShadow)">
+    <rect x="92" y="104" width="88" height="20" rx="3" fill="url(#gradBook1)"/>
+    <rect x="98" y="107" width="76" height="14" rx="2" fill="#fff"/>
+    <path d="M90 104 h 8 v 20 h -8 a 3 3 0 0 1 -3 -3 v -14 a 3 3 0 0 1 3 -3 Z" fill="#b9442a"/>
+  </g>
+
+  <!-- Pencil Cup & Pencils -->
+  <g filter="url(#softShadow)">
+    <rect x="215" y="130" width="34" height="48" rx="6" fill="#4b83b7"/>
+    <rect x="218" y="134" width="28" height="6" rx="2" fill="#3a6f9f"/>
+    <!-- Pencil 1 (Yellow) -->
+    <path d="M222 100 l 6 -18 l 6 18 v 32 h -12 Z" fill="#f4c95d"/>
+    <polygon points="225,82 228,74 231,82" fill="#e06b4f"/>
+    <!-- Pencil 2 (Green) -->
+    <path d="M234 108 l 5 -14 l 5 14 v 24 h -10 Z" fill="#207a5b"/>
+    <!-- Ruler (White) -->
+    <rect x="238" y="90" width="8" height="42" rx="1" fill="#f6f8f5" stroke="#dfe7df" stroke-width="1"/>
+    <line x1="242" y1="96" x2="246" y2="96" stroke="#60706a" stroke-width="1"/>
+    <line x1="242" y1="102" x2="246" y2="102" stroke="#60706a" stroke-width="1"/>
+    <line x1="242" y1="108" x2="246" y2="108" stroke="#60706a" stroke-width="1"/>
+  </g>
+
+  <!-- Cute Star Badges -->
+  <path d="M125 65 l 3 6 l 7 1 l -5 5 l 1 7 l -6 -3 l -6 3 l 1 -7 l -5 -5 l 7 -1 Z" fill="#f4c95d"/>
+  <path d="M255 70 l 2 4 l 5 1 l -4 3 l 1 5 l -4 -2 l -4 2 l 1 -5 l -4 -3 l 5 -1 Z" fill="#e06b4f" opacity="0.8"/>
+  <circle cx="95" cy="55" r="3" fill="#207a5b" opacity="0.5"/>
+  <circle cx="210" cy="50" r="4" fill="#4b83b7" opacity="0.6"/>
+
+  <!-- Graduation Cap (Cute mini) -->
+  <g transform="translate(130, 78) scale(0.9)" filter="url(#softShadow)">
+    <polygon points="35,10 65,22 35,34 5,22" fill="#17211d"/>
+    <path d="M18 28 v 12 c 0 6 17 6 17 6 s 17 0 17 -6 v -12" fill="#17211d"/>
+    <line x1="35" y1="22" x2="10" y2="30" stroke="#f4c95d" stroke-width="2"/>
+    <circle cx="10" cy="32" r="3" fill="#f4c95d"/>
+  </g>
+</svg>
+
